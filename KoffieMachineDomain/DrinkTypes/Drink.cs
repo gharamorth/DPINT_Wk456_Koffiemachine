@@ -16,6 +16,9 @@ namespace KoffieMachineDomain
         public Amount SugarAmount { get; set; }
         public Strength Strength { get; set; }
 
+        public const double SugarPrice = 0.10;//should be removed asap (once the MainViewModel no longer makes use of it...)
+        public const double MilkPrice = 0.15; //same story as above.
+
         public Drink(String name, Amount milkAmount, Amount sugarAmount, Strength strength)
         {
             Name = name;
