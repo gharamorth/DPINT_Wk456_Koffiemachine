@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KoffieMachineDomain.Adapters;
 using KoffieMachineDomain.DrinkDecorators;
 using KoffieMachineDomain.DrinkTypes;
+using KoffieMachineDomain.Enums;
 
 namespace KoffieMachineDomain.Factories
 {
@@ -14,9 +16,12 @@ namespace KoffieMachineDomain.Factories
         //no dictionary necessary as the unlike in the numberConverter project with a dropdown menu they're selected through buttons..
         //nothing instantiated like in the NUmberConverterFactory, so no constructor. The application does not keep a list of ready drinks.
 
-        public IDrink CreateDrink(String name, Amount milkAmount, Amount sugarAmount, Strength strength)
+        public IDrink CreateDrink(String name, Amount milkAmount, Amount sugarAmount, Strength strength, Blend blend)
         {//changed from BaseDrinkDecorator to IDrink due to speciality drinks
-            IDrink drink = new Drink(name, milkAmount, sugarAmount, strength);
+            IDrink drink = new Drink(name, milkAmount, sugarAmount, strength, blend);
+
+            var test = new TeaAdapter(drink);
+            test.getTeaNames();
 
             switch (name)
             {
@@ -26,8 +31,10 @@ namespace KoffieMachineDomain.Factories
                     return new Capuccino(drink);
                 case "Coffee":
                     return new Coffee(drink);
-                case "Hot Chocolate":
+                case "Chocolate":
                     return new Chocolate(drink);
+                case "Chocolate Deluxe":
+                    return new Chocolate(drink, true);
                 case "Espresso":
                     return new Espresso(drink);
                 case "Irish Coffee":
@@ -48,6 +55,10 @@ namespace KoffieMachineDomain.Factories
                     drink = new CreamDecorator(drink);
                     drink = new SugarDecorator(drink);
                     return drink;
+                case "Tea":
+                    return new Tea(drink);
+                case "Tea and Milk":
+                    return new MilkDecorator(new Tea(drink));
                 case "Wiener Melagne":
                     return new WienerMelange(drink);
 

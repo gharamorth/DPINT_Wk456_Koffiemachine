@@ -1,6 +1,8 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using KoffieMachineDomain;
+using KoffieMachineDomain.Adapters;
+using KoffieMachineDomain.Enums;
 using KoffieMachineDomain.Factories;
 using System;
 using System.Collections.Generic;
@@ -14,6 +16,7 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
     {
         private Dictionary<string, double> _cashOnCards;
         public ObservableCollection<string> LogText { get; private set; }
+        //public ObservableCollection<String> TeaNames { get; private set; }
 
         private DrinkFactory _drinkFactory;
 
@@ -30,11 +33,16 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
             LogText.Add("Starting up...");
             LogText.Add("Done, what would you like to drink?");
 
-            _cashOnCards = new Dictionary<string, double>();
-            _cashOnCards["Arjen"] = 5.0;
-            _cashOnCards["Bert"] = 3.5;
-            _cashOnCards["Chris"] = 7.0;
-            _cashOnCards["Daan"] = 6.0;
+            var repository = new TeaRepository();
+            //TeaNames = new ObservableCollection<string>(repository.GetTeaNames());
+
+            _cashOnCards = new Dictionary<string, double>
+            {
+                ["Arjen"] = 5.0,
+                ["Bert"] = 3.5,
+                ["Chris"] = 7.0,
+                ["Daan"] = 6.0
+            };
             PaymentCardUsernames = new ObservableCollection<string>(_cashOnCards.Keys);
             SelectedPaymentCardUsername = PaymentCardUsernames[0];
         }
@@ -142,10 +150,17 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
             set { _milkAmount = value; RaisePropertyChanged(() => MilkAmount); }
         }
 
+        private Blend _blend;
+        public Blend Blend
+        {
+            get { return _blend; }
+            set { _blend = value; RaisePropertyChanged(() => Blend); }
+        }
+
         public ICommand DrinkCommand => new RelayCommand<string>((drinkName) =>
         {
             //factory will throw an exception if you provide an invalid drink name.
-            _selectedDrink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
+            _selectedDrink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength, Blend);
 
             SendUpdate();
         });
@@ -153,7 +168,7 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
         public ICommand DrinkWithSugarCommand => new RelayCommand<string>((drinkName) =>
         {
 
-            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
+            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength, Blend);
             _selectedDrink = _drinkFactory.AddSugar(drink);
 
             SendUpdate();
@@ -161,7 +176,7 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
 
         public ICommand DrinkWithMilkCommand => new RelayCommand<string>((drinkName) =>
         {
-            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
+            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength, Blend);
             _selectedDrink = _drinkFactory.AddMilk(drink);
 
             SendUpdate();
@@ -169,7 +184,7 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
 
         public ICommand DrinkWithSugarAndMilkCommand => new RelayCommand<string>((drinkName) =>
         {
-            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
+            IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength, Blend);
             _selectedDrink = _drinkFactory.AddSugarAndMilk(drink);
 
             SendUpdate();

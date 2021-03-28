@@ -16,6 +16,7 @@ namespace KoffieMachineDomain.Adapters
             chocolate = new HotChocolate();
             Price = chocolate.Cost();
             Name = chocolate.GetNameOfDrink();
+            //deluxe is just as expensive as regular?
         }
 
 

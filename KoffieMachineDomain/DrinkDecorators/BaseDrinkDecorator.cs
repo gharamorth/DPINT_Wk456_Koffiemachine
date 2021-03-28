@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoffieMachineDomain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace KoffieMachineDomain
         public virtual Amount MilkAmount { get => _nextDrink.MilkAmount; set => _nextDrink.MilkAmount = value; }
         public virtual Amount SugarAmount { get => _nextDrink.SugarAmount; set => _nextDrink.SugarAmount = value; }
         public virtual double Price { get => _nextDrink.Price; set => _nextDrink.Price = value; }
+        public virtual Blend Blend { get => _nextDrink.Blend; set => _nextDrink.Blend = value; }
 
         public BaseDrinkDecorator(IDrink drink)
         {

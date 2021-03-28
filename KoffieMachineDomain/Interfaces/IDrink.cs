@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KoffieMachineDomain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,8 @@ namespace KoffieMachineDomain
         Amount MilkAmount { get; set; }
         Amount SugarAmount { get; set; }
         Strength Strength { get; set; }
+        Blend Blend { get; set; }
 
-
-        //Tea?
 
         void LogDrinkMaking(ICollection<string> log);
     }
