@@ -20,8 +20,8 @@ namespace KoffieMachineDomain.Factories
         {//changed from BaseDrinkDecorator to IDrink due to speciality drinks
             IDrink drink = new Drink(name, milkAmount, sugarAmount, strength, blend);
 
-            var test = new TeaAdapter(drink);
-            test.getTeaNames();
+            //var test = new TeaAdapter(drink);
+            //test.getTeaNames();
 
             switch (name)
             {

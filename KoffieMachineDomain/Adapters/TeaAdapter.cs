@@ -13,12 +13,14 @@ namespace KoffieMachineDomain.Adapters
 
         public TeaAdapter(IDrink drink) : base(drink)
         {
-            
+            Name = "Plain Tea";
+            Price = 0.50;
+            SugarAmount = (Amount)tea.AmountOfSugar;
         }
 
-        public List<String> getTeaNames()
-        {
-            return (List<string>)new TeaBlendRepository().BlendNames;
-        }
+        //public List<String> getTeaNames()
+        //{
+        //    return (List<string>)new TeaBlendRepository().BlendNames;
+        //}
     }
 }
