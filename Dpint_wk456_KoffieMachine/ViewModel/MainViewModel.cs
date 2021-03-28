@@ -17,12 +17,14 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
 
         private DrinkFactory _drinkFactory;
 
+        //move payment logic to dedicated classes.
+
         public MainViewModel()
         {
+            _drinkFactory = new DrinkFactory();
             _coffeeStrength = Strength.Normal;
             _sugarAmount = Amount.Normal;
             _milkAmount = Amount.Normal;
-            _drinkFactory = new DrinkFactory();
 
             LogText = new ObservableCollection<string>();
             LogText.Add("Starting up...");
@@ -144,68 +146,49 @@ namespace Dpint_wk456_KoffieMachine.ViewModel
         {
             //factory will throw an exception if you provide an invalid drink name.
             _selectedDrink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
-            
-            if(_selectedDrink != null)
-            {
-                RemainingPriceToPay = _selectedDrink.Price;
-                LogText.Add($"Selected {_selectedDrink.Name}, price: {RemainingPriceToPay.ToString("C", CultureInfo.CurrentCulture)}");
-                RaisePropertyChanged(() => RemainingPriceToPay);
-                RaisePropertyChanged(() => SelectedDrinkName);
-                RaisePropertyChanged(() => SelectedDrinkPrice);
-            }
-            //update
+
+            SendUpdate();
         });
 
         public ICommand DrinkWithSugarCommand => new RelayCommand<string>((drinkName) =>
         {
 
             IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
-            drink = _drinkFactory.AddSugar(drink);//could be a one-liner but that would reduce legibility significantly.
+            _selectedDrink = _drinkFactory.AddSugar(drink);
 
-            if (_selectedDrink != null)
-            {
-                RemainingPriceToPay = _selectedDrink.Price + Drink.SugarPrice;
-                LogText.Add($"Selected {_selectedDrink.Name} with sugar, price: {RemainingPriceToPay.ToString("C", CultureInfo.CurrentCulture)}");
-                RaisePropertyChanged(() => RemainingPriceToPay);
-                RaisePropertyChanged(() => SelectedDrinkName);
-                RaisePropertyChanged(() => SelectedDrinkPrice);
-            }
-            //update
+            SendUpdate();
         });
 
         public ICommand DrinkWithMilkCommand => new RelayCommand<string>((drinkName) =>
         {
             IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
-            drink = _drinkFactory.AddMilk(drink);
+            _selectedDrink = _drinkFactory.AddMilk(drink);
 
-            if (_selectedDrink != null)
-            {
-                RemainingPriceToPay = _selectedDrink.Price + Drink.MilkPrice;
-                LogText.Add($"Selected {_selectedDrink.Name} with milk, price: {RemainingPriceToPay}");
-                RaisePropertyChanged(() => RemainingPriceToPay);
-                RaisePropertyChanged(() => SelectedDrinkName);
-                RaisePropertyChanged(() => SelectedDrinkPrice);
-            }
-            //update
+            SendUpdate();
         });
 
         public ICommand DrinkWithSugarAndMilkCommand => new RelayCommand<string>((drinkName) =>
         {
             IDrink drink = _drinkFactory.CreateDrink(drinkName, MilkAmount, SugarAmount, CoffeeStrength);
-            drink = _drinkFactory.AddSugarAndMilk(drink);
+            _selectedDrink = _drinkFactory.AddSugarAndMilk(drink);
 
-            if (_selectedDrink != null)
-            {
-                RemainingPriceToPay = _selectedDrink.Price + Drink.SugarPrice + Drink.MilkPrice;
-                LogText.Add($"Selected {_selectedDrink.Name} with sugar and milk, price: {RemainingPriceToPay}");
-                RaisePropertyChanged(() => RemainingPriceToPay);
-                RaisePropertyChanged(() => SelectedDrinkName);
-                RaisePropertyChanged(() => SelectedDrinkPrice);
-            }
-
-            //update
+            SendUpdate();
         });
 
         #endregion Coffee buttons
+
+        #region updates and stuff
+
+        private void SendUpdate()
+        {
+            //ensure that it does not need to look at the sugar price and such.
+            RemainingPriceToPay = _selectedDrink.Price;
+            RaisePropertyChanged(() => RemainingPriceToPay);
+            RaisePropertyChanged(() => SelectedDrinkName);
+            RaisePropertyChanged(() => SelectedDrinkPrice);
+            LogText.Add($"Selected {_selectedDrink.Name}, price: {RemainingPriceToPay.ToString("C", CultureInfo.CurrentCulture)}");
+        }
+
+        #endregion updates and stuff
     }
 }

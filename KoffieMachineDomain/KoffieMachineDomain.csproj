@@ -40,22 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Amount.cs" />
-    <Compile Include="BaseDrinkDecorator.cs" />
-    <Compile Include="CafeAuLait.cs" />
-    <Compile Include="Capuccino.cs" />
-    <Compile Include="Coffee.cs" />
-    <Compile Include="Drink.cs" />
+    <Compile Include="DrinkTypes\Chocolate.cs" />
+    <Compile Include="DrinkTypes\Tea.cs" />
+    <Compile Include="Enums\Amount.cs" />
+    <Compile Include="DrinkDecorators\BaseDrinkDecorator.cs" />
+    <Compile Include="DrinkTypes\CafeAuLait.cs" />
+    <Compile Include="DrinkTypes\Capuccino.cs" />
+    <Compile Include="DrinkTypes\Coffee.cs" />
+    <Compile Include="DrinkTypes\Drink.cs" />
     <Compile Include="DrinkDecorators\MilkDecorator.cs" />
     <Compile Include="DrinkDecorators\SugarDecorator.cs" />
-    <Compile Include="Espresso.cs" />
-    <Compile Include="IDrink.cs" />
+    <Compile Include="DrinkTypes\Espresso.cs" />
+    <Compile Include="Factories\DrinkFactory.cs" />
+    <Compile Include="Interfaces\IDrink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Strength.cs" />
-    <Compile Include="WienerMelange.cs" />
+    <Compile Include="Enums\Strength.cs" />
+    <Compile Include="DrinkTypes\WienerMelange.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DrinkTypes\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,7 +10,8 @@ namespace KoffieMachineDomain
     {
         public Coffee(IDrink drink) : base(drink)
         {
-            Price = 1;
+            Name = "Coffee";
+            Price = 1.0;
         }
 
         public override void LogDrinkMaking(ICollection<string> log)
@@ -18,7 +19,7 @@ namespace KoffieMachineDomain
             base.LogDrinkMaking(log);
             log.Add($"Setting coffee strength to {Strength}.");
             log.Add("Filling with coffee...");
-            //log.Add($"Finished making {Name}");
+            log.Add($"Finished making {Name}");
         }
     }
 }
