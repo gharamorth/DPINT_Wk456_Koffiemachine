@@ -38,9 +38,17 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="TeaAndChocoLibrary">
+      <HintPath>..\TeaAndChocoLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ChocolateAdapter.cs" />
+    <Compile Include="DrinkDecorators\CreamDecorator.cs" />
     <Compile Include="DrinkTypes\Chocolate.cs" />
+    <Compile Include="DrinkTypes\IrishCoffee.cs" />
+    <Compile Include="DrinkTypes\ItalianCoffee.cs" />
+    <Compile Include="DrinkTypes\SpanishCoffee.cs" />
     <Compile Include="DrinkTypes\Tea.cs" />
     <Compile Include="Enums\Amount.cs" />
     <Compile Include="DrinkDecorators\BaseDrinkDecorator.cs" />

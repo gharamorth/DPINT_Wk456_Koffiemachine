@@ -14,7 +14,7 @@ namespace KoffieMachineDomain
         public virtual Strength Strength { get => _nextDrink.Strength; set => _nextDrink.Strength = value; }
         public virtual Amount MilkAmount { get => _nextDrink.MilkAmount; set => _nextDrink.MilkAmount = value; }
         public virtual Amount SugarAmount { get => _nextDrink.SugarAmount; set => _nextDrink.SugarAmount = value; }
-        public double Price { get => _nextDrink.Price; set => _nextDrink.Price = value; }
+        public virtual double Price { get => _nextDrink.Price; set => _nextDrink.Price = value; }
 
         public BaseDrinkDecorator(IDrink drink)
         {
