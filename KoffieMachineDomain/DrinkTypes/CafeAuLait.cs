@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace KoffieMachineDomain
 {
@@ -11,20 +7,15 @@ namespace KoffieMachineDomain
         public CafeAuLait(IDrink drink): base(drink)
         {
             Name = "Café au Lait";
+            Price = 1.50;
         }
 
-        public override double GetPrice()
-        {
-            return BaseDrinkPrice + 0.5;
-        }
-
-        public override ICollection<String> LogDrinkMaking(ICollection<string> log)
+        public override void LogDrinkMaking(ICollection<string> log)
         {
             base.LogDrinkMaking(log);
             log.Add("Filling half with coffee...");
             log.Add("Filling other half with milk...");
             log.Add($"Finished making {Name}");
-            return log;
         }
     }
 }

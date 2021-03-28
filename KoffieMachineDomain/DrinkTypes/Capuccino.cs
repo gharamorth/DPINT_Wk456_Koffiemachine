@@ -8,27 +8,22 @@ namespace KoffieMachineDomain
 {
     public class Capuccino : BaseDrinkDecorator
     {
-        public override string Name => "Capuccino";
-        protected virtual Strength DrinkStrength { get; set; }
 
-        public Capuccino()
+        public Capuccino(IDrink drink) : base(drink)
         {
-            DrinkStrength = Strength.Normal;
+            Name = "Capuccino";
+            Strength = Strength.Normal;
+            Price = 1.80;
         }
 
-        public override double GetPrice()
-        {
-            return BaseDrinkPrice + 0.8;
-        }
-        public override ICollection<String> LogDrinkMaking(ICollection<string> log)
+        public override void LogDrinkMaking(ICollection<string> log)
         {
             base.LogDrinkMaking(log);
-            log.Add($"Setting coffee strength to {DrinkStrength}.");
+            log.Add($"Setting coffee strength to {Strength}.");
             log.Add("Filling with coffee...");
             log.Add("Creaming milk...");
             log.Add("Adding milk to coffee...");
             log.Add($"Finished making {Name}");
-            return log;
         }
     }
 }

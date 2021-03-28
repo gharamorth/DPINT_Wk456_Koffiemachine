@@ -10,14 +10,21 @@ namespace KoffieMachineDomain
     public class WienerMelange : BaseDrinkDecorator
     {
 
-        public WienerMelange()
+        public WienerMelange(IDrink drink) : base(drink)
         {
             Name = "Wiener Melagne";
+            Price = 2.0;
         }
 
-        public override double GetPrice()
+        public override void LogDrinkMaking(ICollection<string> log)
         {
-            return BaseDrinkPrice * 2;
+            base.LogDrinkMaking(log);
+
+            log.Add($"Setting coffee strength to {Strength}.");
+            log.Add("Filling with coffee...");
+            log.Add("Creaming milk...");
+            log.Add("Adding milk to coffee...");
+            log.Add($"Finished making {Name}");
         }
     }
 }

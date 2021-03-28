@@ -6,41 +6,19 @@ using System.Threading.Tasks;
 
 namespace KoffieMachineDomain
 {
-    public class Coffee : Drink
+    public class Coffee : BaseDrinkDecorator
     {
-        
-        public virtual bool HasSugar { get; set; }
-        public virtual Amount SugarAmount { get; set; }
-        public virtual bool HasMilk { get; set; }
-        public virtual Amount MilkAmount { get; set; }
-        public virtual Strength DrinkStrength { get; set; }
-
-        public override string Name => "Coffee";
-
-        public override double GetPrice()
+        public Coffee(IDrink drink) : base(drink)
         {
-            return BaseDrinkPrice;
+            Price = 1;
         }
 
         public override void LogDrinkMaking(ICollection<string> log)
         {
             base.LogDrinkMaking(log);
-            log.Add($"Setting coffee strength to {DrinkStrength}.");
+            log.Add($"Setting coffee strength to {Strength}.");
             log.Add("Filling with coffee...");
-
-            if (HasSugar)
-            {
-                log.Add($"Setting sugar amount to {SugarAmount}.");
-                log.Add("Adding sugar...");
-            }
-
-            if (HasMilk)
-            {
-                log.Add($"Setting milk amount to {MilkAmount}.");
-                log.Add("Adding milk...");
-            }
-
-            log.Add($"Finished making {Name}");
+            //log.Add($"Finished making {Name}");
         }
     }
 }

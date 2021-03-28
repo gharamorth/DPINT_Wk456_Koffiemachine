@@ -12,9 +12,11 @@ namespace KoffieMachineDomain
         double Price { get; set; }
         Amount MilkAmount { get; set; }
         Amount SugarAmount { get; set; }
+        Strength Strength { get; set; }
 
-        double GetPrice();
 
-        ICollection<String> LogDrinkMaking(ICollection<string> log);
+        //Tea?
+
+        void LogDrinkMaking(ICollection<string> log);
     }
 }

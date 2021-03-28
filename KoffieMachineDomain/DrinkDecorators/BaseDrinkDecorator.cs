@@ -6,29 +6,24 @@ using System.Threading.Tasks;
 
 namespace KoffieMachineDomain
 {
-    public class BaseDrinkDecorator
+    public class BaseDrinkDecorator :IDrink
     {
         protected IDrink _nextDrink;
 
         public virtual String Name { get => _nextDrink.Name; set => _nextDrink.Name = value; }
-        public virtual double BaseDrinkPrice { get => _nextDrink.Price; set =>_nextDrink.Price = value; }
-        public virtual Strength Strength { get; set; }
-        public virtual Amount MilkAmount { get; set; }
-        public virtual Amount SugarAmount { get; set; }
+        public virtual Strength Strength { get => _nextDrink.Strength; set => _nextDrink.Strength = value; }
+        public virtual Amount MilkAmount { get => _nextDrink.MilkAmount; set => _nextDrink.MilkAmount = value; }
+        public virtual Amount SugarAmount { get => _nextDrink.SugarAmount; set => _nextDrink.SugarAmount = value; }
+        public double Price { get => _nextDrink.Price; set => _nextDrink.Price = value; }
 
         public BaseDrinkDecorator(IDrink drink)
         {
             _nextDrink = drink;
         }
 
-        public virtual double GetPrice()
+        public virtual void LogDrinkMaking(ICollection<string> log)
         {
-            return _nextDrink.GetPrice();
-        }
-
-        public virtual ICollection<String> LogDrinkMaking(ICollection<string> log)
-        {
-            return _nextDrink.LogDrinkMaking(log);
+            _nextDrink.LogDrinkMaking(log);
         }
     }
 }
