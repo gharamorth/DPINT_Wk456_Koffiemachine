@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace KoffieMachineDomain
 {
-    public class WienerMelange : Capuccino
+    //originally a subtype of Cappuccino...
+    public class WienerMelange : BaseDrinkDecorator
     {
-        public override string Name => "Wiener Melange";
 
         public WienerMelange()
         {
-            HasSugar = false;
-            DrinkStrength = Strength.Weak;
+            Name = "Wiener Melagne";
         }
 
         public override double GetPrice()

@@ -41,14 +41,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Amount.cs" />
+    <Compile Include="BaseDrinkDecorator.cs" />
     <Compile Include="CafeAuLait.cs" />
     <Compile Include="Capuccino.cs" />
     <Compile Include="Coffee.cs" />
     <Compile Include="Drink.cs" />
+    <Compile Include="DrinkDecorators\MilkDecorator.cs" />
+    <Compile Include="DrinkDecorators\SugarDecorator.cs" />
     <Compile Include="Espresso.cs" />
+    <Compile Include="IDrink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Strength.cs" />
     <Compile Include="WienerMelange.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DrinkTypes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
